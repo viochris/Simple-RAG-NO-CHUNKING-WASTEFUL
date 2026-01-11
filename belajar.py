@@ -1,3 +1,4 @@
+import time
 import streamlit as st
 from google import genai
 from google.genai import types
@@ -55,35 +56,61 @@ prompt_text = st.chat_input(placeholder="Ask a question about your documents..."
 
 # Handling the input
 if prompt_text:
+    # 1. Display & Save User Message
     st.session_state["message"].append({"role": "human", "content": prompt_text})
     with st.chat_message("human"):
         st.markdown(prompt_text)
 
+    # 2. Process AI with Status Bar
+    answer = ""
     try:
-        with st.status("Read and Understanding Your data..."):
+        # Use expanded=True to show the step-by-step progress
+        with st.status("🚀 Orchestrating AI Workflow...", expanded=True) as status:
+            
+            # STEP 1: Data Preparation
+            st.write("📂 Extracting binary data from documents...")
             client = genai.Client(api_key=st.session_state["api_key"])
-
+            
             content_parts = []
             if uploaded_files:
                 for uploaded_file in uploaded_files:
+                    # Convert uploaded file to Gemini-compatible bytes
                     content_parts.append(
                         types.Part.from_bytes(
-                        data=uploaded_file.getvalue(),
-                        mime_type='application/pdf',
+                            data=uploaded_file.getvalue(),
+                            mime_type='application/pdf',
                         )
                     )
+            
+            # Add a small delay for better UX (User Experience)
+            time.sleep(1) 
 
+            # STEP 2: Integrate Prompt
+            st.write("🔗 Integrating user query with context...")
             content_parts.append(prompt_text)
+            time.sleep(0.5)
 
+            # STEP 3: API Request
+            st.write("🧠 Gemini 2.5 Flash is analyzing the content...")
+            
+            # Generate content using the Long Context method
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=content_parts
             )
+            
             answer = response.text
+            
+            # STEP 4: Completion
+            # Update status to complete (green checkmark)
+            status.update(label="✅ Insight Generated Successfully!", state="complete", expanded=False)
     
     except Exception as e:
         answer = f"An error occurred: {e}"
+        # In case of error, show it in the status bar too
+        status.update(label="❌ Process Failed", state="error", expanded=False)
 
+    # 3. Display & Save AI Response
     with st.chat_message("ai"):
         st.markdown(answer)
 
