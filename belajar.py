@@ -1,9 +1,4 @@
 import streamlit as st
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.agents import AgentExecutor, create_react_agent
-from langchain_community.tools import DuckDuckGoSearchRun
-from langchain.memory import ConversationBufferMemory
-from langchain import hub
 from google import genai
 from google.genai import types
 
