@@ -60,25 +60,26 @@ if prompt_text:
         st.markdown(prompt_text)
 
     try:
-        client = genai.Client(api_key=st.session_state["api_key"])
+        with st.status("Read and Understanding Your data..."):
+            client = genai.Client(api_key=st.session_state["api_key"])
 
-        content_parts = []
-        if uploaded_files:
-            for uploaded_file in uploaded_files:
-                content_parts.append(
-                    types.Part.from_bytes(
-                    data=uploaded_file.getvalue(),
-                    mime_type='application/pdf',
+            content_parts = []
+            if uploaded_files:
+                for uploaded_file in uploaded_files:
+                    content_parts.append(
+                        types.Part.from_bytes(
+                        data=uploaded_file.getvalue(),
+                        mime_type='application/pdf',
+                        )
                     )
-                )
 
-        content_parts.append(prompt_text)
+            content_parts.append(prompt_text)
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=content_parts
-        )
-        answer = response.text
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=content_parts
+            )
+            answer = response.text
     
     except Exception as e:
         answer = f"An error occurred: {e}"
