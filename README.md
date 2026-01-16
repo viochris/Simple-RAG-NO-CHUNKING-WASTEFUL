@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![Google Gemini](https://img.shields.io/badge/Gemini%202.5%20Flash-8E75B2?logo=google&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Experimental-orange)
+![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
 
 ## 📌 Overview
 **DocuChat AI** is a streamlined document analysis tool that leverages the massive **Context Window** of Google's Gemini 2.5 Flash model. 
@@ -70,14 +70,22 @@ While this method provides superior accuracy, it comes with trade-offs:
 
 ## 📷 Gallery
 
-### The Interface
-![UI Screenshot](assets/screenshot_ui.png)
-*Clean interface with sidebar file management and chat history.*
+### 1. Initial State & Security
+![Initial State](assets/01_initial_state.png)
+*Upon launching, the application locks functionality until a valid Google API Key is securely provided in the sidebar.*
 
-### Streaming & Status
-![Streaming Screenshot](assets/screenshot_stream.png)
-*Real-time token counting and step-by-step status updates.*
+### 2. Interactive Document Chat
+![Main Chat UI](assets/02_main_chat_ui.png)
+*Once configured, users can upload documents and engage in a natural language conversation. The AI provides detailed answers grounded in the file content.*
+
+### 3. AI Orchestration (In-Progress)
+![Processing Step](assets/03_process_running.png)
+*The system transparently shows the "thinking" steps in real-time: parsing documents, synchronizing memory, and contextualizing the query.*
+
+### 4. Completion & Token Analysis
+![Process Complete](assets/04_process_complete.png)
+*Once processing is complete, the status turns green ("Insight Generated") and displays the exact **Input Token Count**, giving users full visibility into API usage.*
 
 ---
-**Author:** [Silvio Christian]
+**Author:** [Silvio Christian, Joe]
 *"Sometimes, the best retrieval strategy is to just read everything."*
