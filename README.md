@@ -104,7 +104,7 @@ The application includes a built-in **Help Center (How to Use & FAQ)** located a
 
 ### 2. Interactive Document Chat
 ![Main Chat UI](assets/02_main_chat_ui.png)
-*Once configured, users can upload documents and engage in a natural language conversation. The AI provides detailed answers grounded in the file content.*
+*Once configured, users can upload documents and engage in a natural language conversation. The AI provides detailed answers grounded in the file content. As shown above, the system strictly enforces the selected **Response Language** (English), even when the user queries in a different language (Indonesian).*
 
 ### 3. AI Orchestration (In-Progress)
 ![Processing Step](assets/03_process_running.png)
